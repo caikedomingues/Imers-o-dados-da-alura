@@ -77,7 +77,14 @@ def carregar_dados():
     
     dados['remoto'] = dados['remoto'].replace(renomear_remoto)
     
+    # Agora, vamos eliminar os dado nulos e atribui-los em uma nova
+    # variável (que irá conter todo o dataset limpo)
+    dados_limpos = dados.dropna()
     
-    # Retorno da base de dados carregada e renomeada.
-    return dados
+    # Sobrescrevendo a coluna de ano com dados do tipo inteiro
+    dados_limpos = dados_limpos.assign(ano = dados_limpos['ano'].astype(int))
+    
+    
+    # Retorno da base de dados carregada e renomeada, limpa e com os dados de ano convertidos para inteiros.
+    return dados_limpos
 
